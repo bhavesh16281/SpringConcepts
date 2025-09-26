@@ -2,6 +2,14 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-
-    <bean id="constructorInjection" class="com.bhavesh16281.constructorInjection.ConstructorInjection"/>
+	
+	
+	<!-- Start of Constructor Injection Logic-->
+    <bean id="constructorInjection" class="com.bhavesh16281.constructorInjection.ConstructorInjection">
+    	<constructor-arg ref="car"></constructor-arg>
+    </bean>
+    
+    <bean id="car" class="com.bhavesh16281.constructorInjection.Car"></bean>
+    <!-- End of Constructor Injection Logic-->
+    
 </beans>
