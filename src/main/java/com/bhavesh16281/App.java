@@ -1,15 +1,22 @@
 package com.bhavesh16281;
 
 import com.bhavesh16281.applicationContextIOC.ApplicationContextIOC;
+import com.bhavesh16281.applicationContextIOC.Mobile;
+import com.bhavesh16281.IOC.*;
 import com.bhavesh16281.constructorInjection.ConstructorInjection;
 import com.bhavesh16281.setterInjection.SetterInjection;
 
 import org.springframework.beans.factory.BeanFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.Scope;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
+import org.springframework.stereotype.Component;
 
+@Component
 public class App
 {
     public static void main( String[] args )
@@ -36,5 +43,51 @@ public class App
        ApplicationContext context3 = new ClassPathXmlApplicationContext("com/bhavesh16281/applicationContextIOC.xml");
        ApplicationContextIOC ci2 = (ApplicationContextIOC) context3.getBean("appContext");
        
+       System.out.println();
+       System.out.println("---------------------IOC Container Example: ---------------------");
+       
+       System.out.println("1. Calling Sim Methods without Spring");
+       Sim sim = new Jio();
+       sim.calling();
+       sim.internet();
+       Sim sim2 = new Airtel();
+       sim2.calling();
+       sim2.internet();
+       System.out.println();
+       System.out.println("        Explaination: Without Spring IoC, we would manually create instances of the Sim implementation "
+       		+ "in the main method. This approach tightly couples the App class to the Jio and Airtel implementation. "
+       		+ "In Future If we want to switch to BSNL implementation, we need to modify the source code.");
+       System.out.println("2. Using Spring IOC - XML Configuration");
+       ApplicationContext appContext = new ClassPathXmlApplicationContext("com/bhavesh16281/beans.xml");
+       Sim sim3 = (Sim) appContext.getBean("jio");
+       sim3.calling();
+       sim3.internet();
+       ApplicationContext appContext2 = new ClassPathXmlApplicationContext("com/bhavesh16281/beans.xml");
+       Sim sim4 = (Sim) appContext2.getBean("airtel");
+       sim4.calling();
+       sim4.internet();
+       System.out.println();
+       System.out.println("        Explaination: To avoid tight coupling, we can use the Spring IoC container. "
+       		+ "First, we create an XML configuration file (beans.xml) to define the beans. In the beans.xml file, we define beans by giving each a unique id and specifying the class name. "
+       		+ "Later, in the main method, we can use these beans ");
+       System.out.println("3. Using Java based COnfiguration");
+       ApplicationContext appContext3 = new AnnotationConfigApplicationContext(AppConfig.class);
+       Sim sim5 = (Sim) appContext3.getBean("jio");
+       sim5.calling();
+       sim5.internet();
+       ApplicationContext appContext4 = new AnnotationConfigApplicationContext(AppConfig.class);
+       Sim sim6 = (Sim) appContext3.getBean("airtel");
+       sim6.calling();
+       sim6.internet();
+       System.out.println();
+       System.out.println("        Explaination: In Java based configuration we have to create a config class with @Configuration annotation and @Bean annotation to define beans."
+       		+ "In App class we use AnnotationConfigApplicationContext('Configuration class name') to create an application context object."
+       		+ "Now when we try to get the bean using the bean name, Spring will search for beans in the config class and return the requested beans");
+       System.out.println("4. Using Annotations for DI");
+       ApplicationContext context4 = new AnnotationConfigApplicationContext(AppConfigAnnotation.class);
+       MobileSim mobileSim = context4.getBean(com.bhavesh16281.IOC.MobileSim.class);
+       mobileSim.useSim();
+
     }
+
 }
