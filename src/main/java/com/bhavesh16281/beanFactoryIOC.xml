@@ -4,11 +4,11 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 	
 	<!-- Start of Constructor Injection Logic-->
-    <bean id="appContext" class="com.bhavesh16281.applicationContextIOC.ApplicationContextIOC">
-    	<constructor-arg ref="mobile"></constructor-arg>
+    <bean id="beanFactory" class="com.bhavesh16281.beanFactoryIOC.BeanFactoryIOC">
+    	<property name="laptop" ref="laptop"></property>
     </bean>
     
-    <bean id="mobile" class="com.bhavesh16281.applicationContextIOC.Mobile"></bean>
+    <bean id="laptop" class="com.bhavesh16281.beanFactoryIOC.Laptop"></bean>
     <!-- End of Constructor Injection Logic-->
     
 </beans>

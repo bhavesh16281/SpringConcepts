@@ -5,21 +5,14 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 @Component
-public class MobileSim {
-	
-
-	private Jio jio;
-	
+public class MobileSim2 {
 	
 	@Autowired
-	public MobileSim(Jio jio) {
-		this.jio = jio;
-	}
-
-
-
-	public void useSim() {
-		jio.calling();
-		jio.internet();
+	@Qualifier ("airtel")
+	public Sim sim;
+	
+	public void getSim() {
+		sim.calling();
+		sim.internet();
 	}
 }

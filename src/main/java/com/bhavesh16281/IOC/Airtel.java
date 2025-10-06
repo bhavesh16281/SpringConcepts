@@ -3,7 +3,7 @@ package com.bhavesh16281.IOC;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 
-@Component
+@Component("airtel")
 public class Airtel implements Sim{
 
 	@Override

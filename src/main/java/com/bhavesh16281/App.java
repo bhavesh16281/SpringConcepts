@@ -2,6 +2,7 @@ package com.bhavesh16281;
 
 import com.bhavesh16281.applicationContextIOC.ApplicationContextIOC;
 import com.bhavesh16281.applicationContextIOC.Mobile;
+import com.bhavesh16281.beanFactoryIOC.BeanFactoryIOC;
 import com.bhavesh16281.IOC.*;
 import com.bhavesh16281.constructorInjection.ConstructorInjection;
 import com.bhavesh16281.setterInjection.SetterInjection;
@@ -30,20 +31,30 @@ public class App
        SetterInjection si = (SetterInjection) context2.getBean("setterInjection");
        
        System.out.println();
+       
+       
+       
+       
+       
+       
        System.out.println("---------------------Inversion of Control (IOC) container---------------------");
        System.out.println("1. Bean Factory: ");
-       System.out.println("        Bean Factory is the siple container used to create and manage spring beans lazily(i.e only when needed.)");
-       System.out.println("        This is depiricated and we have to use ApplicationContext instead of BeanFactory.");
-       /* BeanFactory is depricated, hence the below code will not work
+      /* XmlBeanFactory is depricated, hence the below code will not work instead of that use ClassPathXmlApplicationContext
        Resource resource = new ClassPathResource("com/bhavesh16281/constructorConfig.xml");
        BeanFactory factory = new XmlBeanFactory(resource);
        ConstructorInjection ci2 = (ConstructorInjection) factory.getBean("constructorInjection");
 		*/
+       BeanFactory factory = new ClassPathXmlApplicationContext("com/bhavesh16281/beanFactoryIOC.xml");
+       BeanFactoryIOC ci2 = (BeanFactoryIOC) factory.getBean("beanFactory");
        System.out.println("2. Application Context: ");
        ApplicationContext context3 = new ClassPathXmlApplicationContext("com/bhavesh16281/applicationContextIOC.xml");
-       ApplicationContextIOC ci2 = (ApplicationContextIOC) context3.getBean("appContext");
+       ApplicationContextIOC ci3 = (ApplicationContextIOC) context3.getBean("appContext");
        
        System.out.println();
+       
+       
+       
+       
        System.out.println("---------------------IOC Container Example: ---------------------");
        
        System.out.println("1. Calling Sim Methods without Spring");
@@ -57,6 +68,10 @@ public class App
        System.out.println("        Explaination: Without Spring IoC, we would manually create instances of the Sim implementation "
        		+ "in the main method. This approach tightly couples the App class to the Jio and Airtel implementation. "
        		+ "In Future If we want to switch to BSNL implementation, we need to modify the source code.");
+       
+       
+       
+       
        System.out.println("2. Using Spring IOC - XML Configuration");
        ApplicationContext appContext = new ClassPathXmlApplicationContext("com/bhavesh16281/beans.xml");
        Sim sim3 = (Sim) appContext.getBean("jio");
@@ -70,6 +85,10 @@ public class App
        System.out.println("        Explaination: To avoid tight coupling, we can use the Spring IoC container. "
        		+ "First, we create an XML configuration file (beans.xml) to define the beans. In the beans.xml file, we define beans by giving each a unique id and specifying the class name. "
        		+ "Later, in the main method, we can use these beans ");
+       
+       
+       
+       
        System.out.println("3. Using Java based COnfiguration");
        ApplicationContext appContext3 = new AnnotationConfigApplicationContext(AppConfig.class);
        Sim sim5 = (Sim) appContext3.getBean("jio");
@@ -83,11 +102,37 @@ public class App
        System.out.println("        Explaination: In Java based configuration we have to create a config class with @Configuration annotation and @Bean annotation to define beans."
        		+ "In App class we use AnnotationConfigApplicationContext('Configuration class name') to create an application context object."
        		+ "Now when we try to get the bean using the bean name, Spring will search for beans in the config class and return the requested beans");
+       
+       
+       
+       
+       
        System.out.println("4. Using Annotations for DI");
-       ApplicationContext context4 = new AnnotationConfigApplicationContext(AppConfigAnnotation.class);
+       ApplicationContext context4 = new AnnotationConfigApplicationContext(com.bhavesh16281.IOC.AppConfigAnnotation.class);
        MobileSim mobileSim = context4.getBean(com.bhavesh16281.IOC.MobileSim.class);
        mobileSim.useSim();
-
+       System.out.println();
+       System.out.println("        Explaination: In Annotation based DI we have to create a config class with @Configuration annotation along with "
+       		+ "@ComponentScan inside which we mention the package which the config file has to scan."
+       		+ "Now inside the mentioned package, use @Component in all the classes which spring has to create ean and use @Autowired annotation"
+       		+ "where there are dependencies inside a class. ");
+       System.out.println();
+       
+       System.out.println("        Note: Here we have Sim interface which is implemented by Jio and Airtel, Suppose if we autowire both Jio and Airtel references inside MobileSim.class, we will get No Unique Bean Found Exception."
+       		+ "To overcode this we use @Primary annotation or @Qualifier Annotation");
+       System.out.println("        @Primary Annotation: ");
+       System.out.println("                Make one of the beans primary by using @Primary annotation in one of the class.");
+       System.out.println("        @Qualifier: ");
+       System.out.println("                Use Qualifier annotation with a name and use the same name as component name.");
+       ApplicationContext context5 = new AnnotationConfigApplicationContext(AppConfig2.class);
+       MobileSim2 mobSim = context5.getBean(MobileSim2.class);
+       mobSim.getSim();
+       
+       
+       
+       
+       
+       
     }
 
 }
