@@ -6,7 +6,8 @@ import com.bhavesh16281.beanFactoryIOC.BeanFactoryIOC;
 import com.bhavesh16281.IOC.*;
 import com.bhavesh16281.constructorInjection.ConstructorInjection;
 import com.bhavesh16281.setterInjection.SetterInjection;
-
+import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -127,11 +128,33 @@ public class App
        ApplicationContext context5 = new AnnotationConfigApplicationContext(AppConfig2.class);
        MobileSim2 mobSim = context5.getBean(MobileSim2.class);
        mobSim.getSim();
+       System.out.println();
        
        
        
        
+       System.out.println("---------------------Bean Life Cycle ---------------------");
+       System.out.println("1. Container Started");
+       System.out.println("2. Bean Instantiated");
+       System.out.println("3. Dependencies Injected");
+       System.out.println("4. Custom init() method");
+       System.out.println("5. Bean is Ready");
+       System.out.println("6. Custom utility method");
+       System.out.println("7. Custom destroy() method");
+       System.out.println();
        
+       
+       
+       
+       System.out.println("---------------------Ways to Implement Bean Life Cycle ---------------------");
+       ConfigurableApplicationContext cap = new ClassPathXmlApplicationContext("com/bhavesh16281/spring.xml");
+       cap.close();
+       
+       ConfigurableApplicationContext cap2 = new ClassPathXmlApplicationContext("com/bhavesh16281/spring2.xml");
+       cap2.close();
+       
+       ConfigurableApplicationContext cap3 = new ClassPathXmlApplicationContext("com/bhavesh16281/spring3.xml");
+       cap3.close();
        
     }
 
