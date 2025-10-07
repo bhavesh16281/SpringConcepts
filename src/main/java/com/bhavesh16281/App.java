@@ -6,6 +6,15 @@ import com.bhavesh16281.beanFactoryIOC.BeanFactoryIOC;
 import com.bhavesh16281.IOC.*;
 import com.bhavesh16281.constructorInjection.ConstructorInjection;
 import com.bhavesh16281.setterInjection.SetterInjection;
+import com.bhavesh16281.springAnnotations.BeanAnnotation;
+import com.bhavesh16281.springAnnotations.Book;
+import com.bhavesh16281.springAnnotations.ComponentScanAnnotation;
+import com.bhavesh16281.springAnnotations.ConfigurationAnnotation;
+import com.bhavesh16281.springAnnotations.ControllerAnnotation;
+import com.bhavesh16281.springAnnotations.House;
+import com.bhavesh16281.springAnnotations.Pen;
+import com.bhavesh16281.springAnnotations.Pencil;
+
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.beans.factory.BeanFactory;
@@ -155,7 +164,26 @@ public class App
        
        ConfigurableApplicationContext cap3 = new ClassPathXmlApplicationContext("com/bhavesh16281/spring3.xml");
        cap3.close();
+       System.out.println();
        
+       
+       
+       System.out.println("---------------------Spring Annotations---------------------");
+       ApplicationContext annotation = new AnnotationConfigApplicationContext(ConfigurationAnnotation.class);
+       Book book = (Book) annotation.getBean("bookBean");
+       book.bookMethod();
+       
+       ApplicationContext annotation2 = new AnnotationConfigApplicationContext(ComponentScanAnnotation.class);
+       Pen pen = (Pen) annotation2.getBean("pen");
+       pen.penMethod();
+       
+       ApplicationContext annotation3 = new AnnotationConfigApplicationContext(BeanAnnotation.class);
+       House house = (House) annotation3.getBean("houseBean");
+       house.houseMethod();
+       
+       ApplicationContext annotation4 = new AnnotationConfigApplicationContext(ControllerAnnotation.class);
+       Pencil pencil = (Pencil) annotation4.getBean("pencil");
+       pencil.pencilMethod();
     }
 
 }
