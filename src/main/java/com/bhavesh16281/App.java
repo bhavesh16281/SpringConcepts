@@ -6,6 +6,10 @@ import com.bhavesh16281.beanFactoryIOC.BeanFactoryIOC;
 import com.bhavesh16281.IOC.*;
 import com.bhavesh16281.constructorInjection.ConstructorInjection;
 import com.bhavesh16281.setterInjection.SetterInjection;
+import com.bhavesh16281.springExpressionLanguage.Employee;
+import com.bhavesh16281.springExpressionLanguage.Shirt;
+import com.bhavesh16281.springExpressionLanguage.SpELConfig;
+
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.beans.factory.BeanFactory;
@@ -155,6 +159,18 @@ public class App
        
        ConfigurableApplicationContext cap3 = new ClassPathXmlApplicationContext("com/bhavesh16281/spring3.xml");
        cap3.close();
+       System.out.println();
+       
+       
+       
+       System.out.println("---------------------Spring Expression Language(SpEL)---------------------");
+       ApplicationContext con = new ClassPathXmlApplicationContext("com/bhavesh16281/expressionLanguage.xml");
+       Shirt shirt  = (Shirt) con.getBean("shirt");
+       shirt.getSize();
+       
+       ApplicationContext con2 = new AnnotationConfigApplicationContext(SpELConfig.class);
+       Employee employee = (Employee) con2.getBean("employee");
+       employee.getSalary();
        
     }
 
