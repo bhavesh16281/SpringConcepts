@@ -10,13 +10,21 @@ import com.bhavesh16281.setterInjection.SetterInjection;
 import com.bhavesh16281.springAnnotations.BeanAnnotation;
 import com.bhavesh16281.springAnnotations.Book;
 import com.bhavesh16281.springAnnotations.Cat;
+import com.bhavesh16281.springAnnotations.ComponentAnnotation;
 import com.bhavesh16281.springAnnotations.ComponentScanAnnotation;
 import com.bhavesh16281.springAnnotations.ConfigurationAnnotation;
 import com.bhavesh16281.springAnnotations.ControllerAnnotation;
 import com.bhavesh16281.springAnnotations.Dog;
+import com.bhavesh16281.springAnnotations.Heart;
 import com.bhavesh16281.springAnnotations.House;
 import com.bhavesh16281.springAnnotations.Pen;
 import com.bhavesh16281.springAnnotations.Pencil;
+import com.bhavesh16281.springAnnotations.QualifierAnnotation;
+import com.bhavesh16281.springAnnotations.QualifierTest;
+import com.bhavesh16281.springAnnotations.RepositoryAnnotation;
+import com.bhavesh16281.springAnnotations.ServiceAnnotation;
+import com.bhavesh16281.springAnnotations.Student;
+import com.bhavesh16281.springAnnotations.TV;
 import com.bhavesh16281.springAnnotations.valueAnnotation;
 import com.bhavesh16281.springExpressionLanguage.Employee;
 import com.bhavesh16281.springExpressionLanguage.Shirt;
@@ -209,6 +217,21 @@ public class App
        ApplicationContext annotation6 = new AnnotationConfigApplicationContext(valueAnnotation.class);
        Cat cat = (Cat) annotation6.getBean("cat");
        cat.display();
+       
+       ApplicationContext annotation7 = new AnnotationConfigApplicationContext(QualifierAnnotation.class);
+       QualifierTest qualifier = (QualifierTest) annotation7.getBean("qualifierTest");
+       qualifier.getMethod();
+       
+       ApplicationContext annotation8 = new AnnotationConfigApplicationContext(ServiceAnnotation.class);
+       TV tv = (TV) annotation8.getBean("tv");
+       tv.tvMethod();
+       
+       ApplicationContext annotation9 = new AnnotationConfigApplicationContext(RepositoryAnnotation.class);
+       Student student = (Student) annotation9.getBean("student");
+       student.studentMethod();
+       
+//       ApplicationContext annotation10 = new AnnotationConfigApplicationContext(ComponentAnnotation.class);
+       
     }
 
 }
