@@ -6,20 +6,21 @@ import com.bhavesh16281.beanFactoryIOC.BeanFactoryIOC;
 import com.bhavesh16281.IOC.*;
 import com.bhavesh16281.constructorInjection.ConstructorInjection;
 import com.bhavesh16281.setterInjection.SetterInjection;
-<<<<<<< HEAD
+
 import com.bhavesh16281.springAnnotations.BeanAnnotation;
 import com.bhavesh16281.springAnnotations.Book;
+import com.bhavesh16281.springAnnotations.Cat;
 import com.bhavesh16281.springAnnotations.ComponentScanAnnotation;
 import com.bhavesh16281.springAnnotations.ConfigurationAnnotation;
 import com.bhavesh16281.springAnnotations.ControllerAnnotation;
+import com.bhavesh16281.springAnnotations.Dog;
 import com.bhavesh16281.springAnnotations.House;
 import com.bhavesh16281.springAnnotations.Pen;
 import com.bhavesh16281.springAnnotations.Pencil;
-=======
+import com.bhavesh16281.springAnnotations.valueAnnotation;
 import com.bhavesh16281.springExpressionLanguage.Employee;
 import com.bhavesh16281.springExpressionLanguage.Shirt;
 import com.bhavesh16281.springExpressionLanguage.SpELConfig;
->>>>>>> aa249d73204cb0bcb03e5c9fc42656dd01a5a33c
 
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -171,9 +172,7 @@ public class App
        ConfigurableApplicationContext cap3 = new ClassPathXmlApplicationContext("com/bhavesh16281/spring3.xml");
        cap3.close();
        System.out.println();
-<<<<<<< HEAD
-=======
-       
+
        
        
        System.out.println("---------------------Spring Expression Language(SpEL)---------------------");
@@ -184,8 +183,7 @@ public class App
        ApplicationContext con2 = new AnnotationConfigApplicationContext(SpELConfig.class);
        Employee employee = (Employee) con2.getBean("employee");
        employee.getSalary();
->>>>>>> aa249d73204cb0bcb03e5c9fc42656dd01a5a33c
-       
+       System.out.println();
        
        
        System.out.println("---------------------Spring Annotations---------------------");
@@ -204,6 +202,13 @@ public class App
        ApplicationContext annotation4 = new AnnotationConfigApplicationContext(ControllerAnnotation.class);
        Pencil pencil = (Pencil) annotation4.getBean("pencil");
        pencil.pencilMethod();
+       
+       ApplicationContext annotation5 = new ClassPathXmlApplicationContext("com/bhavesh16281/valueAnnotation.xml");
+       Dog dog = (Dog) annotation5.getBean("dog");
+       dog.display();
+       ApplicationContext annotation6 = new AnnotationConfigApplicationContext(valueAnnotation.class);
+       Cat cat = (Cat) annotation6.getBean("cat");
+       cat.display();
     }
 
 }
