@@ -15,6 +15,7 @@ import com.bhavesh16281.springAnnotations.ComponentScanAnnotation;
 import com.bhavesh16281.springAnnotations.ConfigurationAnnotation;
 import com.bhavesh16281.springAnnotations.ControllerAnnotation;
 import com.bhavesh16281.springAnnotations.Dog;
+import com.bhavesh16281.springAnnotations.Gym;
 import com.bhavesh16281.springAnnotations.Heart;
 import com.bhavesh16281.springAnnotations.House;
 import com.bhavesh16281.springAnnotations.Pen;
@@ -23,8 +24,11 @@ import com.bhavesh16281.springAnnotations.QualifierAnnotation;
 import com.bhavesh16281.springAnnotations.QualifierTest;
 import com.bhavesh16281.springAnnotations.RepositoryAnnotation;
 import com.bhavesh16281.springAnnotations.ServiceAnnotation;
+import com.bhavesh16281.springAnnotations.Sky;
 import com.bhavesh16281.springAnnotations.Student;
 import com.bhavesh16281.springAnnotations.TV;
+import com.bhavesh16281.springAnnotations.Teacher;
+import com.bhavesh16281.springAnnotations.autowiredAnnotation;
 import com.bhavesh16281.springAnnotations.valueAnnotation;
 import com.bhavesh16281.springExpressionLanguage.Employee;
 import com.bhavesh16281.springExpressionLanguage.Shirt;
@@ -230,8 +234,17 @@ public class App
        Student student = (Student) annotation9.getBean("student");
        student.studentMethod();
        
-//       ApplicationContext annotation10 = new AnnotationConfigApplicationContext(ComponentAnnotation.class);
+       ApplicationContext annotation10 = new AnnotationConfigApplicationContext(ComponentAnnotation.class);
+       Teacher teacher = (Teacher) annotation10.getBean("teacher");
+       teacher.teacherMethod();
        
+       ApplicationContext annotation11 = new ClassPathXmlApplicationContext("com/bhavesh16281/autowiredAnnotation.xml");
+       Sky sky = (Sky) annotation11.getBean("sky");
+       sky.skyMethod();
+       
+       ApplicationContext annotation12 = new AnnotationConfigApplicationContext(autowiredAnnotation.class);
+       Gym gym = (Gym) annotation12.getBean("gym");
+       gym.gymMethod();
     }
 
 }

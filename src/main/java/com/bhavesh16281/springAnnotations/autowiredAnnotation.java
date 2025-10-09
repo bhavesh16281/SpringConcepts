@@ -4,7 +4,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@ComponentScan(basePackages = "com/bhavesh16281/springAnnotations")
-public class ComponentAnnotation {
+@ComponentScan(basePackages = "com.bhavesh16281.springAnnotations")
+public class autowiredAnnotation {
 
 }
