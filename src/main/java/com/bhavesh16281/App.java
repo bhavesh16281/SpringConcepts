@@ -6,7 +6,7 @@ import com.bhavesh16281.beanFactoryIOC.BeanFactoryIOC;
 import com.bhavesh16281.IOC.*;
 import com.bhavesh16281.constructorInjection.ConstructorInjection;
 import com.bhavesh16281.setterInjection.SetterInjection;
-
+import com.bhavesh16281.springAnnotations.AC;
 import com.bhavesh16281.springAnnotations.BeanAnnotation;
 import com.bhavesh16281.springAnnotations.Book;
 import com.bhavesh16281.springAnnotations.Cat;
@@ -18,6 +18,7 @@ import com.bhavesh16281.springAnnotations.Dog;
 import com.bhavesh16281.springAnnotations.Gym;
 import com.bhavesh16281.springAnnotations.Heart;
 import com.bhavesh16281.springAnnotations.House;
+import com.bhavesh16281.springAnnotations.MobilePhone;
 import com.bhavesh16281.springAnnotations.Pen;
 import com.bhavesh16281.springAnnotations.Pencil;
 import com.bhavesh16281.springAnnotations.QualifierAnnotation;
@@ -30,6 +31,8 @@ import com.bhavesh16281.springAnnotations.TV;
 import com.bhavesh16281.springAnnotations.Teacher;
 import com.bhavesh16281.springAnnotations.autowiredAnnotation;
 import com.bhavesh16281.springAnnotations.valueAnnotation;
+import com.bhavesh16281.springAnnotations.withScopeAnnotation;
+import com.bhavesh16281.springAnnotations.withoutScopeAnnotation;
 import com.bhavesh16281.springExpressionLanguage.Employee;
 import com.bhavesh16281.springExpressionLanguage.Shirt;
 import com.bhavesh16281.springExpressionLanguage.SpELConfig;
@@ -245,6 +248,28 @@ public class App
        ApplicationContext annotation12 = new AnnotationConfigApplicationContext(autowiredAnnotation.class);
        Gym gym = (Gym) annotation12.getBean("gym");
        gym.gymMethod();
+       
+       ApplicationContext annotation13 = new AnnotationConfigApplicationContext(withoutScopeAnnotation.class);
+       System.out.println("11. @Scope Annotation: ");
+       System.out.println("        Without @Scope: ");
+       MobilePhone mobile = (MobilePhone) annotation13.getBean("mobile");
+       mobile.setMessage("Setting message for Mobile Phone..");
+       mobile.getMessage();
+       
+       MobilePhone mobile2 = (MobilePhone) annotation13.getBean("mobile");
+       mobile2.getMessage();
+       System.out.println("            Here eventhough we are trying to get 2 different beans, the default scope of spring bean is singleton."
+       		+ " Hence Spring returned the same object when we use getBean() with two diferent references.");
+       System.out.println("        With @Scope: ");
+       ApplicationContext annotation14 = new AnnotationConfigApplicationContext(withScopeAnnotation.class);
+       AC ac = (AC) annotation14.getBean("ac");
+       ac.setMessage("AC is turned ON");
+       ac.getMessage();
+       AC ac2 = (AC) annotation14.getBean("ac");
+       ac2.getMessage();
+       System.out.println("            Here we have used @Scope as prototype instead of singleton in AC.java so when we tried to get the beans using different references Spring IOC container"
+       		+ " returned two different beans.That is the reason second bean is printed as null.");
+      
     }
 
 }
